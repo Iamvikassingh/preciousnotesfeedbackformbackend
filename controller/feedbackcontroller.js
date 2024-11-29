@@ -19,6 +19,25 @@ const saveFeedback = async (req, res) => {
     }
 };
 
+
+const getAllFeedback = async (req, res) => {
+    try {
+        // Fetch all feedback data from the database, sorted by sNo in descending order (most recent first)
+        const feedbackData = await Feedback.find().sort({ sNo: -1 });
+
+        // If no feedback data is found
+        if (!feedbackData || feedbackData.length === 0) {
+            return res.status(404).json({ message: 'No feedback found' });
+        }
+
+        // Respond with the fetched feedback data
+        res.status(200).json(feedbackData);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     saveFeedback,
+    getAllFeedback
 };
