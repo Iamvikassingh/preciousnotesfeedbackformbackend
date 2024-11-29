@@ -34,6 +34,9 @@ connectToDb(`${ConnectionString}/${DataBaseName}`)
 
 // Routes
 app.use('/api', userRouter);
+app.get('/',(req,resp)=>{
+    resp.send('YOUR SERVER IS ALIVE VIKAS SINGH');
+})
 
 // Start the server
 app.listen(PORT, () => {
